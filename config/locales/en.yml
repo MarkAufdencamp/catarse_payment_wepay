@@ -1,0 +1,7 @@
+en:
+  projects:
+    backers:
+      wepay:
+        review:
+          title: 'Wepay'
+          button: 'Pay with Wepay'
