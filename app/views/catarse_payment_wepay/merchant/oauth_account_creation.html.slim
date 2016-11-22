@@ -1,0 +1,6 @@
+- if @access_token
+	| You're OAuth authentication with WePay succeeded!
+	== partial 'account_creation_success'
+- else
+	| You're OAuth authentication with WePay failed!
+	== partial 'account_creation_failure'
