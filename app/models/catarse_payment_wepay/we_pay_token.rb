@@ -1,5 +1,6 @@
 module CatarsePaymentWepay
   class WePayToken < ActiveRecord::Base
-    attr_accessible :token, :userId
+    # TODO: Encrypt WePayToken.access_token
+    attr_accessible :user_id, :wepay_user_id, :access_token
   end
 end

@@ -11,15 +11,51 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161114224040) do
+ActiveRecord::Schema.define(:version => 20161121153929) do
 
-  create_table "catarse_payment_wepay_we_pay_tokens", :force => true do |t|
-    t.string   "userId"
-    t.string   "token"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "catarse_payment_wepay_we_pay_accounts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "proj_id"
+    t.string   "account_id"
+    t.string   "name"
+    t.string   "state"
+    t.string   "desc"
+    t.string   "owner_user_id"
+    t.string   "balances"
+    t.string   "statuses"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
-  add_index "catarse_payment_wepay_we_pay_tokens", ["token"], :name => "index_catarse_payment_wepay_we_pay_tokens_on_token"
+  add_index "catarse_payment_wepay_we_pay_accounts", ["account_id"], :name => "index_catarse_payment_wepay_we_pay_accounts_on_account_id"
+  add_index "catarse_payment_wepay_we_pay_accounts", ["owner_user_id"], :name => "index_catarse_payment_wepay_we_pay_accounts_on_owner_user_id"
+  add_index "catarse_payment_wepay_we_pay_accounts", ["proj_id"], :name => "index_catarse_payment_wepay_we_pay_accounts_on_proj_id"
+  add_index "catarse_payment_wepay_we_pay_accounts", ["user_id"], :name => "index_catarse_payment_wepay_we_pay_accounts_on_user_id"
+
+  create_table "catarse_payment_wepay_we_pay_tokens", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "wepay_user_id"
+    t.string   "access_token"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "catarse_payment_wepay_we_pay_tokens", ["user_id"], :name => "index_catarse_payment_wepay_we_pay_tokens_on_user_id"
+  add_index "catarse_payment_wepay_we_pay_tokens", ["wepay_user_id"], :name => "index_catarse_payment_wepay_we_pay_tokens_on_wepay_user_id"
+
+  create_table "catarse_payment_wepay_we_pay_users", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "wepay_user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "state"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "catarse_payment_wepay_we_pay_users", ["email"], :name => "index_catarse_payment_wepay_we_pay_users_on_email"
+  add_index "catarse_payment_wepay_we_pay_users", ["user_id"], :name => "index_catarse_payment_wepay_we_pay_users_on_user_id"
+  add_index "catarse_payment_wepay_we_pay_users", ["wepay_user_id"], :name => "index_catarse_payment_wepay_we_pay_users_on_wepay_user_id"
 
 end
