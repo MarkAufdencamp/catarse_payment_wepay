@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161121153929) do
+ActiveRecord::Schema.define(:version => 20161128052310) do
 
   create_table "catarse_payment_wepay_we_pay_accounts", :force => true do |t|
     t.integer  "user_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20161121153929) do
     t.string   "wepay_user_id"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "user_name"
     t.string   "email"
     t.string   "state"
     t.datetime "created_at",    :null => false
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20161121153929) do
 
   add_index "catarse_payment_wepay_we_pay_users", ["email"], :name => "index_catarse_payment_wepay_we_pay_users_on_email"
   add_index "catarse_payment_wepay_we_pay_users", ["user_id"], :name => "index_catarse_payment_wepay_we_pay_users_on_user_id"
+  add_index "catarse_payment_wepay_we_pay_users", ["user_name"], :name => "index_catarse_payment_wepay_we_pay_users_on_user_name"
   add_index "catarse_payment_wepay_we_pay_users", ["wepay_user_id"], :name => "index_catarse_payment_wepay_we_pay_users_on_wepay_user_id"
 
 end
