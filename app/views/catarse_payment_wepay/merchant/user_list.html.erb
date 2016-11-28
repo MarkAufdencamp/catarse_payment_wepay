@@ -1,3 +1,20 @@
-= javascript_include_tag 'catarse_payment_wepay'
-#catarse_payment_wepay_merchant_setup_form
-  WePay Merchant Setup
+<% javascript_include_tag 'catarse_payment_wepay' %>
+<div id='catarse_payment_wepay_user_list'>
+<h2>WePay Merchant Collection - Paginated List of WePayUsers</h2>
+</div>
+<%= will_paginate(@we_pay_users, previous_label: h("<"), next_label: h(">")) %>
+<table>
+<% for we_pay_user in @we_pay_users %>
+	<tr>
+	<td>
+	<%= link_to( we_pay_user.last_name + ', ' + we_pay_user.first_name, wepay_user_info_path(:user_id => we_pay_user.user_id)) %>
+	</td>
+	<td>
+	<%= we_pay_user.email %>
+	</td>
+	<td>
+	<%= we_pay_user.wepay_user_id%>
+	</td>
+	</tr>
+<% end %>
+</table>
