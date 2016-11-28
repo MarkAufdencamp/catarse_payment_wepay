@@ -19,3 +19,4 @@ gem "jquery-rails"
 gem 'test-unit', '~> 3.0'
 gem 'slim'
 gem 'wepay', '~> 0.2.2'
+gem 'will_paginate', '~> 3.1.0'
