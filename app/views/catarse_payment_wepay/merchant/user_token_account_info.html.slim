@@ -1,2 +1,25 @@
+=javascript_include_tag 'catarse_payment_wepay'
 #user-token-account-info
-  WePay User Token Account Info
+  <h2>WePayUser, WePayToken, and WePayAccounts Info</h2>
+  =link_to 'Return to WePay Users List', wepay_root_path
+  <div>
+    =@we_pay_user.last_name + ', ' + @we_pay_user.first_name
+  </div>
+  <div>
+    =@we_pay_token.access_token
+  </div>
+  =will_paginate(@we_pay_accounts, previous_label: h("<"), next_label: h(">"))
+  <table>
+  - for we_pay_account in @we_pay_accounts
+    <tr>
+    <td>
+      =we_pay_account.name
+    </td>
+    <td>
+      =we_pay_account.desc
+    </td>
+    <td>
+      =link_to we_pay_account.account_id, wepay_account_info_path(:user_id => @user_id, :proj_id => we_pay_account.proj_id)
+    </td>
+    </tr>
+  </table>
