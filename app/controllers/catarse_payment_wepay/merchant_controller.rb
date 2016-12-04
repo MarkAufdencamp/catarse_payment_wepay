@@ -156,6 +156,29 @@ module CatarsePaymentWepay
         render 'account_creation_failure'
       end
     end
+    
+    def account_refresh
+      @user_id = params[:user_id]
+      @proj_id = params[:proj_id]
+      if @user_id
+        @we_pay_user = we_pay_user
+        @we_pay_token = we_pay_token
+        if @we_pay_token
+          @access_token = @we_pay_token[:access_token]
+        else
+          @access_token = nil
+        end
+      end
+      if @user_id && @proj_id
+        @we_pay_account = we_pay_account
+      end
+      if @user_id && @proj_id && @we_pay_user && @we_pay_token &&  @access_token  && @we_pay_account
+        refresh_wepay_account
+        render 'account_info'
+      else
+        
+      end
+    end
         
   private
     def factory_wepay_client
@@ -234,6 +257,36 @@ module CatarsePaymentWepay
         :user_id => @user_id,
         :proj_id => @proj_id
       )
+    end
+    
+    def refresh_wepay_account
+      response = @wepay.call('/account', @access_token, {
+        :account_id => @we_pay_account.account_id
+      })
+      puts response
+      
+      account_id = response['account_id']
+      name = response['name']
+      state = response['state']
+      desc = response['description']
+      owner_user_id = response['owner_user_id']
+      balances = response['balances']
+      statuses = response['statuses']
+      
+      # Found the account for the project
+      # The project found account matches the account_id from WePay
+      # The project found owner_user_id matches thw owner_user_id from WePay - would break WePayUser RI
+      # Same account_id and owner_user_id
+      if @we_pay_account && (@we_pay_account.account_id.to_i == account_id) && (@we_pay_account.owner_user_id == owner_user_id.to_s) then
+        @we_pay_account.name = name
+        @we_pay_account.state = state
+        @we_pay_account.desc = desc
+        @we_pay_account.balances = balances
+        @we_pay_account.statuses = statuses        
+        @we_pay_account.save
+      else
+        # TODO: Error from WePay -or- Key field issues -or- WePay Owner change 
+      end
     end
     
     def we_pay_token

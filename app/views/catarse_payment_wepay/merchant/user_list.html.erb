@@ -7,7 +7,10 @@
 <% for we_pay_user in @we_pay_users %>
 	<tr>
 	<td>
-	<%= link_to( we_pay_user.last_name + ', ' + we_pay_user.first_name, wepay_user_info_path(:user_id => we_pay_user.user_id)) %>
+	<%= link_to( we_pay_user.user_name,  wepay_user_info_path(:user_id => we_pay_user.user_id)) %>
+	</td>
+	<td>
+	<%= we_pay_user.last_name + ', ' + we_pay_user.first_name %>
 	</td>
 	<td>
 	<%= we_pay_user.email %>

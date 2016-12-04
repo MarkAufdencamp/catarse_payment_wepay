@@ -1,5 +1,30 @@
 #account-info
   <h2>WePay Account Info</h2>
-  =@we_pay_account.account_id
-  <br />
-  =link_to 'Return to WePay User Info',  wepay_user_info_path(:user_id => @user_id)
+  <h3>User Name</h3>
+  #wepay-user-info
+  	=@we_pay_user.user_name
+  <h3>Account Name</h3>
+  #wepay-account-name
+  	=@we_pay_account.name
+  <h3>Account Desc</h3>
+  #wepay-account-desc
+  	=@we_pay_account.desc
+  <h3>Account Id</h3>
+  #wepay-account-info
+  	=@we_pay_account.account_id
+  <h3>Account State</h3>
+  #wepay-account-state
+  	=@we_pay_account.state
+  <h3>Account Owner User Id</h3>
+  #wepay-user-owner-id
+  	=@we_pay_account.owner_user_id
+  <h3>Account Status</h3>
+  #wepay-account-status
+  	=@we_pay_account.statuses
+  <h3>Account Balances</h3> 
+  #wepay-account-balance
+  	=@we_pay_account.balances
+  #wepay-account-refresh
+  	=link_to 'Refresh WePay Account Info',  wepay_account_refresh_path(:user_id => @user_id, :proj_id => @proj_id)
+  #wepay-return-nav
+  	=link_to 'Return to WePay User Info',  wepay_user_info_path(:user_id => @user_id)
