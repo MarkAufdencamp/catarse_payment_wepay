@@ -2,8 +2,8 @@
 class CreateWePayUsers < ActiveRecord::Migration
   def up
     create_table :catarse_payment_wepay_we_pay_users do |t|
-      t.integer :user_id
-      t.string :wepay_user_id
+      t.integer :user_id, foreign_key: false
+      t.string :wepay_user_id, foreign_key: false
       t.string :first_name
       t.string :last_name
       t.string :user_name
@@ -19,6 +19,6 @@ class CreateWePayUsers < ActiveRecord::Migration
   end
   
   def down
-    
+    drop_table :catarse_payment_wepay_we_pay_users
   end
 end
